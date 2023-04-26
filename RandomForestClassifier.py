@@ -17,8 +17,8 @@ training_data[['VIP', 'CryoSleep', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 
 training_data[["Deck", "Cabin_num", "Side"]] = training_data["Cabin"].str.split("/", expand=True)
 
-training_data['Destination'].fillna('TRAPPIST-1e', inplace=True)
-training_data['HomePlanet'].fillna('Earth', inplace=True)
+#training_data['Destination'].fillna('TRAPPIST-1e', inplace=True)
+#training_data['HomePlanet'].fillna('Earth', inplace=True)
 training_data = toInt(training_data)
 
 
