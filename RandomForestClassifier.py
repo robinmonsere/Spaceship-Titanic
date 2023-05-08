@@ -9,6 +9,15 @@ def toInt(data) :
             data[coll] = data[coll].astype('category').cat.codes.astype(int)
     return data
 
+def fillna_by_condition(data):
+    cols_to_fill = ['ShoppingMall', 'Spa', 'VRDeck', 'FoodCourt', 'RoomService']
+    for index, row in data.iterrows():
+        if row['CryoSleep'] == True:
+            for col in cols_to_fill:
+                if pd.isna(row[col]):
+                    data.at[index, col] = 0
+    return data
+
 # Load the data
 training_data = pd.read_csv('train.csv')
 print(training_data.isnull().sum().sort_values(ascending=False))
@@ -23,6 +32,8 @@ training_data[["Deck", "Cabin_num", "Side"]] = training_data["Cabin"].str.split(
 
 #training_data['Destination'].fillna('TRAPPIST-1e', inplace=True)
 #training_data['HomePlanet'].fillna('Earth', inplace=True)
+
+training_data = fillna_by_condition(training_data)
 
 training_data = toInt(training_data)
 
